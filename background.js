@@ -20,5 +20,10 @@ function navigate(url) {
 }
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
-  navigate("https://admin.dashboard.pantheon.io/sites/" + text);
+  if (text.match(/dashboard\.pantheon\.io/)){
+    var adminUrl = text;
+    navigate(adminUrl.replace("dashboard.pantheon.io", "admin.dashboard.pantheon.io"));
+  } else {
+    navigate("https://admin.dashboard.pantheon.io/sites/" + text);
+  }
 });
